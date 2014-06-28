@@ -1,7 +1,11 @@
 <?php
 /**
-* XPhoto - Extention to upload photo and capture from webcam or camera using HTML5
+* XPhoto - Extension to upload photo and capture from webcam or camera using HTML5
 * Licenced under WTFPL - http://wtfpl.net
+* ---------------------------------------
+* Project page:
+* - http://www.yiiframework.com/extension/xphoto/
+* - https://github.com/khayatzen/xphoto
 * --------------------------------------------------------------------------------
 * @author Muhammad Khayat - khayat@infest.or.id
 * Blog: http://yat.my.id
@@ -17,7 +21,7 @@
 /**
 * How to use it:
 * -----------------------------------------
-* $this->widget('ext.XPhoto',array(
+* $this->widget('ext.xphoto.XPhoto',array(
 * 	'model'=>$model,
 * 	'attribute'=>'user_photo',
 * ));
@@ -39,7 +43,7 @@ class XPhoto extends CWidget{
 
 	//public $allowedExtensions = array('jpg','jpeg','png');
 
-	public $url;
+	public $photoUrl;
 	/**
 	* model name for active field
 	*/
@@ -104,9 +108,11 @@ class XPhoto extends CWidget{
 		);
 		$videoContainerOptions = array(
 			'class'=>'xphoto-video-container',
-			'style'=>'width:'.$this->width.'px;height:'.$this->height.'px',
+			'style'=>'width:'.$this->width.'px;height:'.$this->height.'px;',
 		);
-
+		if(isset($this->photoUrl)){
+			$videoContainerOptions['style'].='background-image:url("'.$this->photoUrl.'");';
+		}
 		echo CHtml::openTag('div', $videoContainerOptions);
 		if($this->capture){
 			echo CHtml::openTag('video', $videoOptions);
@@ -150,6 +156,7 @@ class XPhoto extends CWidget{
 			'photoHeight'=> $this->height,
 			'withModal'=> $this->withModal,
 			'inputID'=> CHtml::activeID($this->model,$this->attribute),
+			'photoUrl'=> $this->photoUrl,
 			//'autostart'=> true,
 		);
 		$cs->registerScript($this->id.'_xphoto',"			

@@ -21,6 +21,7 @@ var XPhoto = XPhotoClass({
 		capture: true,
 		photoWidth: 300,
 		photoHeight: 350,
+        photoUrl: null,
 		withModal: false,
 	},
 	videoContainerElement: null,
