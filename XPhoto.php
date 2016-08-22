@@ -159,7 +159,7 @@ class XPhoto extends CWidget{
 			'photoUrl'=> $this->photoUrl,
 			//'autostart'=> true,
 		);
-		$cs->registerScript($this->id.'_xphoto',"			
+		$cs->registerScript($this->getId().'_xphoto',"			
 			var ".$this->getId()."_xphoto_instance = new XPhoto(".CJavaScript::encode($options).");			
 		");
 	}
